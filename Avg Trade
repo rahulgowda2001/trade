@@ -1,0 +1,40 @@
+// Function to ask for trade details and calculate averages
+function calculateTradeAverages() {
+  let trades = [];
+  let input = '';
+
+  while (input.toLowerCase() !== 'x') {
+    let quantity = parseInt(prompt("Enter quantity: "), 10);
+    let boughtPrice = parseFloat(prompt("Enter bought price: "));
+    let soldPrice = parseFloat(prompt("Enter sold price: "));
+
+    trades.push({ quantity, boughtPrice, soldPrice });
+
+    input = prompt("Press '+' to add more trades or 'x' to calculate averages.");
+
+    if (input === '+') {
+      continue;
+    }
+  }
+
+  let totalQuantity = 0;
+  let totalBoughtAmount = 0;
+  let totalSoldAmount = 0;
+
+  trades.forEach(trade => {
+    totalQuantity += trade.quantity;
+    totalBoughtAmount += trade.boughtPrice * trade.quantity;
+    totalSoldAmount += trade.soldPrice * trade.quantity;
+  });
+
+  let averageQuantity = totalQuantity / trades.length;
+  let averageBoughtPrice = totalBoughtAmount / totalQuantity;
+  let averageSoldPrice = totalSoldAmount / totalQuantity;
+
+  console.log(`Average Quantity: ${averageQuantity}`);
+  console.log(`Average Bought Price: ${averageBoughtPrice.toFixed(2)}`);
+  console.log(`Average Sold Price: ${averageSoldPrice.toFixed(2)}`);
+}
+
+// Call the function to start the process
+calculateTradeAverages();
